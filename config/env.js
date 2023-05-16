@@ -30,13 +30,14 @@ const dotenvFiles = [
 // that have already been set.  Variable expansion is supported in .env files.
 // https://github.com/motdotla/dotenv
 // https://github.com/motdotla/dotenv-expand
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
 dotenvFiles.forEach(dotenvFile => {
   if (fs.existsSync(dotenvFile)) {
-    require('dotenv-expand')(
-      require('dotenv').config({
-        path: dotenvFile,
-      })
-    );
+    const envConfig = dotenv.config({
+      path: dotenvFile,
+    });
+    dotenvExpand.expand(envConfig);
   }
 });
 
