@@ -6,10 +6,8 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/">
-                    <SampleGuard>
-                        <SampleView />
-                    </SampleGuard>
+                <Route path='/' element={<SampleGuard/>}>
+                    <Route path='/' element={<SampleView />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

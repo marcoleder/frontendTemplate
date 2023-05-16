@@ -9,7 +9,7 @@ export const SampleView = () => {
     
     return (
         <BaseContainer>
-            <p>Hello there</p>
+            <p>Welcome</p>
         </BaseContainer>
     );
 };

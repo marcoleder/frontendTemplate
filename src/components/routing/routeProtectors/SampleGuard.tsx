@@ -1,13 +1,8 @@
-import PropTypes from "prop-types";
-import { redirect } from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
 
 export const SampleGuard = (props: any) => {
-    if (sessionStorage.getItem("sample")) {
-        return redirect("/");
-    }
-    return props.children;
-};
+    const auth = true; // determine if authorized
 
-SampleGuard.propTypes = {
-    children: PropTypes.node,
-};
+    // authorized: return outlet rendering child elements, else redirect
+    return auth ? <Outlet /> : <Navigate to="/" />;
+}
