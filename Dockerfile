@@ -25,7 +25,5 @@ COPY --chown=node:node --from=build /app/node_modules /app/node_modules
 COPY --chown=node:node --from=build /app/build build
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
 EXPOSE 3000
-# Install serve
-RUN npm install -g serve
 # start app
-CMD [ "serve", "-s", "build" ]
+CMD [ "npx", "serve", "build" ]
