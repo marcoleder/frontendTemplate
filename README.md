@@ -1,5 +1,6 @@
 # frontendTemplate
-Based on SoPra template
+Based on SoPra template\
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=marcoleder&repo=frontendTemplate&show_owner=true)
 
 ## Available Scripts
 
