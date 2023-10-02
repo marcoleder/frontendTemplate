@@ -27,3 +27,5 @@ Launches the test runner via scripts/test.js in the interactive watch mode
 
 ### `npm run start`
 Runs serve -s build to serve the production build
+
+License: GNU GPLv3
