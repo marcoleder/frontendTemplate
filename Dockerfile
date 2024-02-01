@@ -1,10 +1,12 @@
-FROM node:18.12.1 as build
+FROM node:20.11.0 as build
 # Set container working directory to /app
 WORKDIR /app
 # Copy npm instructions
 COPY package*.json ./
-# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
-RUN npm ci
+# Set npm cache to a directory the non-root user can access
+RUN npm config set cache /app/.npm-cache --global
+# Install dependencies with npm ci (exact versions in the lockfile), suppressing warnings
+RUN npm ci --loglevel=error
 # Copy app (useless stuff is ignored by .dockerignore)
 COPY . .
 # Build the app
@@ -13,9 +15,11 @@ RUN npm run build
 RUN npm prune --production
 
 # make image smaller by using multi stage build
-FROM node:18.12.1-alpine
+FROM node:20.11.0-alpine
 # Set the env to "production"
 ENV NODE_ENV production
+# Set npm cache to a directory the non-root user can access
+RUN npm config set cache /app/.npm-cache --global
 # get non-root user (using a number since a string could interfere with kubernetes)
 USER 3301
 # Set container working directory to /app
@@ -26,4 +30,4 @@ COPY --chown=node:node --from=build /app/build build
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
 EXPOSE 3000
 # start app
-CMD [ "npx", "serve", "build" ]
+CMD [ "npx", "serve", "-s", "build" ]
