@@ -3,6 +3,8 @@ FROM node:20.11.0 as build
 WORKDIR /app
 # Copy npm instructions
 COPY package*.json ./
+# Copy npm instructions
+COPY .npmrc ./
 # Set npm cache to a directory the non-root user can access
 RUN npm config set cache /app/.npm-cache --global
 # Install dependencies with npm ci (exact versions in the lockfile), suppressing warnings
