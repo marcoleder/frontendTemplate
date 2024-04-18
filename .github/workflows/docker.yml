@@ -40,5 +40,6 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{secrets.dockerhub_username}}/${{secrets.repo_name}}:${{github.sha}},${{secrets.dockerhub_username}}/${{secrets.repo_name}}:latest
+        platforms: linux/amd64,linux/arm64/v8
         cache-from: type=registry,ref=${{secrets.dockerhub_username}}/${{secrets.repo_name}}:cache
         cache-to: type=inline,mode=max
